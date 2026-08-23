@@ -33,14 +33,14 @@ public class BankOperations implements BankDoc {
 			System.out.println(e);
 		} finally {
 			try {
-				if (ps != null) {
-					ps.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			}catch(SQLException e) {
-				System.out.println(e);
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -74,23 +74,26 @@ public class BankOperations implements BankDoc {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-		}
-		finally {
+		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (ps1 != null) {
-					ps1.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			}catch(SQLException e) {
-				System.out.println(e);
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				ps1.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -127,23 +130,26 @@ public class BankOperations implements BankDoc {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-		}
-		finally {
+		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (ps1 != null) {
-					ps1.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			}catch(SQLException e) {
-				System.out.println(e);
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				ps1.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -171,20 +177,21 @@ public class BankOperations implements BankDoc {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-		}
-		finally {
+		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			}catch(SQLException e) {
-				System.out.println(e);
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -206,20 +213,21 @@ public class BankOperations implements BankDoc {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-		}
-		finally {
+		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			}catch(SQLException e) {
-				System.out.println(e);
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		return flag;
@@ -242,16 +250,16 @@ public class BankOperations implements BankDoc {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-		}finally {
+		} finally {
 			try {
-				if (cs != null) {
-					cs.close();
-				}
-				if (con != null) {
-					con.close();
-				}
-			}catch(SQLException e) {
-				System.out.println(e);
+				cs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 	}
