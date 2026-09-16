@@ -10,14 +10,13 @@ import com.banksystem.model.Account;
 import com.banksystem.utility.DBConnection;
 
 public class BankOperations implements BankDoc {
-	DBConnection db = new DBConnection();
 	Connection con = null;
 
 	@Override
 	public void createAccount(Account a) {
 		PreparedStatement ps = null;
 		try {
-			con = db.getConnection();
+			con = DBConnection.getConnection();
 			ps = con.prepareStatement("insert into account values (?,?,?,?)");
 			ps.setInt(1, a.getAccno());
 			ps.setString(2, a.getAccname());
@@ -37,11 +36,6 @@ public class BankOperations implements BankDoc {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -51,7 +45,7 @@ public class BankOperations implements BankDoc {
 		ResultSet rs = null;
 		PreparedStatement ps1 = null;
 		try {
-			con = db.getConnection();
+			con = DBConnection.getConnection();
 			ps = con.prepareStatement("select accno from account where accno=?");
 			ps.setInt(1, acno);
 			rs = ps.executeQuery();
@@ -77,22 +71,9 @@ public class BankOperations implements BankDoc {
 		} finally {
 			try {
 				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
 				ps1.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
 				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				con.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -105,7 +86,7 @@ public class BankOperations implements BankDoc {
 		ResultSet rs = null;
 		PreparedStatement ps1 = null;
 		try {
-			con = db.getConnection();
+			con = DBConnection.getConnection();
 			ps = con.prepareStatement("select balance from account where accno=?");
 			ps.setInt(1, acno);
 			rs = ps.executeQuery();
@@ -133,21 +114,33 @@ public class BankOperations implements BankDoc {
 		} finally {
 			try {
 				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
 				ps1.close();
-			} catch (SQLException e) {
+				ps.close();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		
+		}
+	}
+	
+	@Override
+	public void deleteAccountbyId(int accno) {
+		PreparedStatement ps = null;
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement("delete from account where accno=?");
+			ps.setInt(1, accno);
+			int n = ps.executeUpdate();
+			if (n > 0) {
+				System.out.println(n + " row(s) deleted");
+			} else {
+				System.out.println("Something went Wrong");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
 			try {
 				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -159,7 +152,7 @@ public class BankOperations implements BankDoc {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			con = db.getConnection();
+			con = DBConnection.getConnection();
 			ps = con.prepareStatement("select balance from account where accno=?");
 			ps.setInt(1, acno);
 			rs = ps.executeQuery();
@@ -180,17 +173,8 @@ public class BankOperations implements BankDoc {
 		} finally {
 			try {
 				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
 				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				con.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -202,7 +186,7 @@ public class BankOperations implements BankDoc {
 		ResultSet rs = null;
 		boolean flag = false;
 		try {
-			con = db.getConnection();
+			con = DBConnection.getConnection();
 			ps = con.prepareStatement("select * from account where accno=?");
 			ps.setInt(1, acno);
 			rs = ps.executeQuery();
@@ -216,17 +200,8 @@ public class BankOperations implements BankDoc {
 		} finally {
 			try {
 				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
 				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				con.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -237,7 +212,7 @@ public class BankOperations implements BankDoc {
 	public void transferAmountByProcedure(int acno1, int acno2, double amt) {
 		CallableStatement cs = null;
 		try {
-			con = db.getConnection();
+			con = DBConnection.getConnection();
 			cs = con.prepareCall("{call new_procedure(?,?,?)}");
 			cs.setInt(1, acno1);
 			cs.setInt(2, acno2);
@@ -253,12 +228,7 @@ public class BankOperations implements BankDoc {
 		} finally {
 			try {
 				cs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				con.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

@@ -12,12 +12,15 @@ public interface BankDoc {
     //update
     void withdrawMoneyById(int acno,Account a);
     
+    //delete
+    void deleteAccountbyId(int accno);
+    
     //select
     void checkBalance(int acno);
     
     //select
     boolean viewAccountDetailsById(int acno);
     
-    //procedure
+    //procedure by callable statement
     void transferAmountByProcedure(int acno1,int acno2,double amt);
 }
